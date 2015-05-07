@@ -1,6 +1,7 @@
 (function() {
 	window.Poll = {
-		load: function(data) {
+		load: function(_pollid) {
+			var data = { pollid: _pollid };
 			Poll.sockets.emit.load(data.pollid, function(err, poll) {
 				if (!err) {
 					Poll.view.init(poll, function(pollView) {
