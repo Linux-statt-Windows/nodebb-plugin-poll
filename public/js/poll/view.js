@@ -63,7 +63,7 @@
 		},
 		insertPoll: function(poll, callback) {
 			View.parsePoll(poll, function(html) {
-				$('#post-container .post-row[data-index="0"] .post-content').prepend(html);
+				$('[component="post"][data-index="0"] [component="post/content"]').append(html);
 				callback();
 			});
 		},
