@@ -36,29 +36,31 @@
 			return poll;
 		},
 		parsePoll: function(poll, callback) {
-			poll = View.parseResults(poll);
+			require(['translator'], function(translator) {
+				poll = View.parseResults(poll);
 
-			//Todo REMOVE BEFORE RELEASE
-			//Development compatibility
-			if (poll.info.title) {
-				poll.settings.title = poll.info.title;
-			}
+				//Todo REMOVE BEFORE RELEASE
+				//Development compatibility
+				if (poll.info.title) {
+					poll.settings.title = poll.info.title;
+				}
 
-			if (parseInt(poll.settings.maxvotes, 10) > 1) {
-				poll.optiontype = 'checkbox';
-			} else {
-				poll.optiontype = 'radio';
-			}
+				if (parseInt(poll.settings.maxvotes, 10) > 1) {
+					poll.optiontype = 'checkbox';
+				} else {
+					poll.optiontype = 'radio';
+				}
 
-			window.templates.parse('poll/view', poll, function(html){
-				var plugPath = '/plugins/nodebb-plugin-poll/public',
-					relPath = config.relative_path;
+				window.templates.parse('poll/view', poll, function(html){
+					var plugPath = '/plugins/nodebb-plugin-poll/public',
+						relPath = config.relative_path;
 
-				config.relative_path = plugPath;
-				translator.translate(html, config.userLang, function(translatedHtml) {
-					callback(translatedHtml);
+					config.relative_path = plugPath;
+					translator.translate(html, config.userLang, function(translatedHtml) {
+						callback(translatedHtml);
+					});
+					config.relative_path = relPath;
 				});
-				config.relative_path = relPath;
 			});
 		},
 		insertPoll: function(poll, callback) {
