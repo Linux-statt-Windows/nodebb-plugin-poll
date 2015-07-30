@@ -3,7 +3,6 @@ var	NodeBB = require('./lib/nodebb'),
 	Sockets = require('./lib/sockets'),
 	Hooks = require('./lib/hooks'),
 	Utils = require('./lib/utils'),
-	Admin = require('./lib/admin'),
 
 	PluginSockets = NodeBB.pluginSockets,
 	AdminSockets = NodeBB.adminSockets,
